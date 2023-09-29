@@ -7,3 +7,8 @@
 .relative:hover .popup {
   opacity: 1; /* Show the popup on hover */
 }
+
+.transition {
+  transition: opacity 0.2s ease-in-out; /* Add a smooth opacity transition */
+  pointer-events: none; /* Prevents blocking the button underneath */
+}

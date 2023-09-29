@@ -30,17 +30,20 @@ export default function Home() {
     >
       {/* ngestack gpp soalnya bsa drag */}
       <div
-        className="flex space-x-2 absolute top-[60px] left-[60px] z-50"
+        className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-50"
         onClick={() => setEmployee(!employee)}
       >
-        <Switch id="airplane-mode" />
-        <div className="w-[65px] text-center">
-          <Label htmlFor="airplane-mode" className="text-primary pt-1">
-            {employee ? "Employee" : "Applicants"}
-          </Label>
+        <p className="text-black text-4xl font-extrabold tracking-wider"><span className="text-6xl text-primary">HR</span>ef</p>
+        <div className="flex space-x-2">
+          <Switch id="airplane-mode" />
+          <div className="w-[65px] text-center">
+            <Label htmlFor="airplane-mode" className="text-primary pt-1 font-semibold">
+              {employee ? "Employee" : "Applicants"}
+            </Label>
+          </div>
         </div>
       </div>
-      <div className="relative">
+      <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]">
         <PersonNode diameter={diameter} />
       </div>
     </main>
