@@ -46,14 +46,20 @@ export default function Home() {
   };
 
   const handleWheel = (e) => {
+    const maxZoom = 200;
+    const minZoom = 10;
     let scale = 1;
+
     const scaleFactor = 1.05;
     if (e.deltaY > 0) {
       scale *= scaleFactor;
     } else {
       scale /= scaleFactor;
     }
-    setDiameter((prevDiameter) => prevDiameter * scale);
+    setDiameter((prevDiameter) => {
+      const newDiameter = prevDiameter * scale
+      return Math.min(Math.max(newDiameter, minZoom), maxZoom);
+    });
   };
 
   return (
