@@ -14,7 +14,7 @@ export default function PersonNode({ diameter }) {
       />
       {showPopup && (
         <div
-          className="w-64 h-44 bg-white text-black absolute top-0 left-0 -translate-y-[176px] translate-x-[48px] rounded-md popup"
+          className="w-64 h-44 bg-white text-black absolute top-0 left-0 -translate-y-[176px] translate-x-[48px] rounded-md popup shadow-md"
           onMouseLeave={() => setShowPopup(false)}
         ></div>
       )}
