@@ -2,9 +2,12 @@
 
 import PersonNode from "@/components/PersonNode";
 import { useEffect, useState, useRef } from "react";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 
 export default function Home() {
   const [diameter, setDiameter] = useState(48);
+  const [employee, setEmployee] = useState(false);
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -22,10 +25,24 @@ export default function Home() {
 
   return (
     <main
-      className="flex min-h-screen flex-col items-center justify-between p-24 bg-white"
+      className="flex min-h-screen flex-col bg-white p-12 relative"
       ref={mainRef}
     >
-      <PersonNode diameter={diameter} />
+      {/* ngestack gpp soalnya bsa drag */}
+      <div
+        className="flex space-x-2 absolute top-[60px] left-[60px] z-50"
+        onClick={() => setEmployee(!employee)}
+      >
+        <Switch id="airplane-mode" />
+        <div className="w-[65px] text-center">
+          <Label htmlFor="airplane-mode" className="text-primary pt-1">
+            {employee ? "Employee" : "Applicants"}
+          </Label>
+        </div>
+      </div>
+      <div className="relative">
+        <PersonNode diameter={diameter} />
+      </div>
     </main>
   );
 }
