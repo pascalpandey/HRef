@@ -1,29 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import "./PersonNode.css";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
 
 export default function PersonNode({ diameter }) {
-  const [showPopup, setShowPopup] = useState(false);
   return (
-    <div
-      className="relative w-72 h-52 transition"
-      onMouseEnter={() => {
-        setShowPopup(true);
-      }}
-      onMouseLeave={() => {
-        setShowPopup(false);
-      }}
-    >
+    <HoverCard>
+      <HoverCardTrigger asChild>
       <button
-        className="rounded-full bg-red-400 bottom-0 left-0 absolute"
+        className="rounded-full bg-red-400"
         style={{ width: `${diameter}px`, height: `${diameter}px` }}
       />
-      {showPopup && (
-        <div
-          className="w-64 h-44 bg-white text-black absolute top-0 right-0 rounded-md popup shadow-md"
-        ></div>
-      )}
-    </div>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-64 h-48 rounded-md shadow-md translate-x-[130px] -translate-y-[220px]">
+        
+      </HoverCardContent>
+    </HoverCard>
   );
 }
