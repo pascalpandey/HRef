@@ -4,6 +4,7 @@ import PersonNode from "@/components/PersonNode";
 import { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [diameter, setDiameter] = useState(48);
@@ -28,16 +29,17 @@ export default function Home() {
       className="flex min-h-screen flex-col bg-white p-12 relative"
       ref={mainRef}
     >
-      {/* ngestack gpp soalnya bsa drag */}
-      <div
-        className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-50"
-        onClick={() => setEmployee(!employee)}
-      >
-        <p className="text-black text-4xl font-extrabold tracking-wider"><span className="text-6xl text-primary">HR</span>ef</p>
-        <div className="flex space-x-2">
+      <div className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-50">
+        <p className="text-black text-4xl font-extrabold tracking-wider">
+          <span className="text-6xl text-primary">HR</span>ef
+        </p>
+        <div className="flex space-x-2" onClick={() => setEmployee(!employee)}>
           <Switch id="airplane-mode" />
           <div className="w-[65px] text-center">
-            <Label htmlFor="airplane-mode" className="text-primary pt-1 font-semibold">
+            <Label
+              htmlFor="airplane-mode"
+              className="text-primary pt-1 font-semibold"
+            >
               {employee ? "Employee" : "Applicants"}
             </Label>
           </div>
@@ -46,6 +48,11 @@ export default function Home() {
       <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]">
         <PersonNode diameter={diameter} />
       </div>
+      {!employee && (
+        <div className="flex absolute top-[60px] right-[60px] flex-col gap-4 z-50">
+          <Button>+ Upload CV</Button>
+        </div>
+      )}
     </main>
   );
 }
