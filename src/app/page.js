@@ -5,6 +5,12 @@ import { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import DragDrop from "@/components/DragAndDrop";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 
 export default function Home() {
   const [diameter, setDiameter] = useState(48);
@@ -46,12 +52,19 @@ export default function Home() {
         </div>
       </div>
       <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]">
-        <PersonNode diameter={diameter} />
+        <PersonNode diameter={diameter} employee={employee} />
       </div>
       {!employee && (
-        <div className="flex absolute top-[60px] right-[60px] flex-col gap-4 z-50">
-          <Button>+ Upload CV</Button>
-        </div>
+        <Popover>
+          <PopoverTrigger asChild>
+            <div className="flex absolute top-[60px] right-[60px] flex-col gap-4 z-50">
+              <Button>+ Upload CV</Button>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent className="w-[360px] -translate-x-12 translate-y-2">
+            <DragDrop/>
+          </PopoverContent>
+        </Popover>
       )}
     </main>
   );

@@ -6,7 +6,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
 
-export default function PersonNode({ diameter }) {
+export default function PersonNode({ diameter, employee }) {
   return (
     <HoverCard>
       <HoverCardTrigger asChild>
