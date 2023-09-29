@@ -7,7 +7,7 @@ export default function PersonNode({ diameter }) {
   const [showPopup, setShowPopup] = useState(false);
   return (
     <div
-      className="relative w-72 h-52 transition"
+      className="relative w-72 h-52"
       onMouseEnter={() => {
         setShowPopup(true);
       }}
