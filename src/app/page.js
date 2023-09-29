@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import PersonNode from "@/components/PersonNode";
+import axios from "axios";
 
 export default function Home() {
   const [diameter, setDiameter] = useState(48);
@@ -14,6 +15,8 @@ export default function Home() {
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const mapRef = useRef(null);
 
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     mainRef.current.addEventListener("wheel", handleWheel);
@@ -22,6 +25,15 @@ export default function Home() {
       document.removeEventListener("mousemove", handleMouseMove);
     };
   });
+
+  useEffect(() => {
+    axios.get("http://localhost:3000/candidates")
+      .then((res) => {
+        setData(res.data);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }, [])
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -34,9 +46,8 @@ export default function Home() {
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-
-    const x = e.clientX - dragOffset.x;
-    const y = e.clientY - dragOffset.y;
+    const x = e.clientX - dragOffset.x - 50;
+    const y = e.clientY - dragOffset.y - 50;
 
     mapRef.current.style.transform = `translate(${x}px, ${y}px)`;
   };
@@ -46,7 +57,7 @@ export default function Home() {
   };
 
   const handleWheel = (e) => {
-    const maxZoom = 200;
+    const maxZoom = 80;
     const minZoom = 10;
     let scale = 1;
 
@@ -84,15 +95,30 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div
-        className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]"
-        style={{ border: "3px solid red", cursor: isDragging ? "grabbing" : "grab" }}
-        ref={mapRef}
+
+      <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] overflow-hidden"
+        style={{ cursor: isDragging ? "grabbing" : "grab", border: "3px solid blue" }}
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      >
-        <PersonNode diameter={diameter} />
+        onMouseUp={handleMouseUp}>
+        <div
+          className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]"
+          ref={mapRef}
+        >
+          {
+            data.map((el, index) => (
+              <div
+                className="absolute"
+                style={{ left: `${el.x}px`, top: `${el.y}px` }}
+                key={index}
+              >
+                <PersonNode diameter={diameter} />
+              </div>
+            ))
+          }
+        </div>
       </div>
+
+
     </main>
   );
 }

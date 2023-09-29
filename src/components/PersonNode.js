@@ -17,7 +17,7 @@ export default function PersonNode({ diameter }) {
     >
       <button
         className="rounded-full bg-red-400 bottom-0 left-0 absolute"
-        style={{ width: `${diameter}px`, height: `${diameter}px` }}
+        style={{ width: `${diameter}px`, height: `${diameter}px`, transition: "width 0.3s ease-in-out, height 0.3s ease-in-out" }}
       />
       {showPopup && (
         <div
