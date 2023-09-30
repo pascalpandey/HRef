@@ -73,8 +73,8 @@ const UploadDialog = () => {
                 </button>
             </Dialog.Trigger>
             <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 opacity-50 bg-black animate-overlay-show " />
-                <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md shadow-lg max-w-[450px] max-h-[85vh] p-6 animate-content-show focus:outline-none w-full">
+                <Dialog.Overlay className="fixed inset-0 opacity-50 bg-black animate-overlay-show z-40" />
+                <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-md shadow-lg max-w-[450px] max-h-[85vh] p-6 animate-content-show focus:outline-none w-full z-50">
                     <Dialog.Title className="text-black font-semibold">
                         Add Resume
                     </Dialog.Title>

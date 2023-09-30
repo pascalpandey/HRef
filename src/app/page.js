@@ -11,7 +11,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
 export default function Home() {
   const [employee, setEmployee] = useState(false);
@@ -49,28 +49,27 @@ export default function Home() {
       { x: 1600, y: 150 },
       { x: 1800, y: 150 },
       { x: 2000, y: 100 },
-      { x: 2000, y: 0 }
-    ]
+      { x: 2000, y: 0 },
+    ];
 
     setData(candidates);
-  }, [])
+  }, []);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
     const rect = mapRef.current.getBoundingClientRect();
-    const offsetX = (e.clientX - rect.left);
-    const offsetY = (e.clientY - rect.top);
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
     setDragOffset({ x: offsetX, y: offsetY });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const x = (e.clientX - dragOffset.x - 50);
-    const y = (e.clientY - dragOffset.y - 50);
+    const x = e.clientX - dragOffset.x - 50;
+    const y = e.clientY - dragOffset.y - 50;
 
     mapRef.current.style.transform = `translate(${x}px, ${y}px)`;
   };
-
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -85,7 +84,7 @@ export default function Home() {
       newScale /= scaleFactor;
     }
 
-    newScale = Math.min(Math.max(newScale, 0.5), 2)
+    newScale = Math.min(Math.max(newScale, 0.5), 2);
     setScale(newScale);
   };
 
@@ -95,7 +94,7 @@ export default function Home() {
       ref={mainRef}
     >
       <div
-        className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-50"
+        className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-30"
         onClick={() => setEmployee(!employee)}
       >
         <p className="text-black text-4xl font-extrabold tracking-wider">
@@ -115,44 +114,34 @@ export default function Home() {
       </div>
 
       <div
-        className="absolute top-[50px] right-[60px] z-50"
-      >
-        <Dialog />
-      </div>
-
-      <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] overflow-hidden"
-        style={{ cursor: isDragging ? "grabbing" : "grab", border: "3px solid blue" }}
+        className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] overflow-hidden"
+        style={{
+          cursor: isDragging ? "grabbing" : "grab",
+          border: "3px solid blue",
+        }}
         onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}>
+        onMouseUp={handleMouseUp}
+      >
         <div
-          className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]"
+          className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] border-red"
           style={{ scale: `${scale}` }}
           ref={mapRef}
         >
-          {
-            data.map((el, index) => (
-              <div
-                className="absolute"
-                style={{ left: `${el.x}px`, top: `${el.y}px` }}
-                key={index}
-              >
-                <PersonNode />
-              </div>
-            ))
-          }
+          {data.map((el, index) => (
+            <div
+              className="absolute"
+              style={{ left: `${el.x}px`, top: `${el.y}px` }}
+              key={index}
+            >
+              <PersonNode />
+            </div>
+          ))}
         </div>
       </div>
       {!employee && (
-        <Popover>
-          <PopoverTrigger asChild>
-            <div className="flex absolute top-[60px] right-[60px] flex-col gap-4 z-50">
-              <Button>+ Upload CV</Button>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-[360px] -translate-x-12 translate-y-2">
-            <DragDrop/>
-          </PopoverContent>
-        </Popover>
+        <div className="absolute top-[50px] right-[60px] z-30">
+          <Dialog />
+        </div>
       )}
     </main>
   );
