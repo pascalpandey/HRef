@@ -67,7 +67,7 @@ module.exports = {
         },
         "overlayShow": {
           from: { opacity: 0 },
-          to: { opacity: 0.3 },
+          to: { opacity: 0.5 },
         },
         "contentShow": {
           from: {
