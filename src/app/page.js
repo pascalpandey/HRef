@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import PersonNode from "@/components/PersonNode";
-import axios from "axios";
+import Dialog from "@/components/ui/UploadDialog";
 
 export default function Home() {
   const [employee, setEmployee] = useState(false);
@@ -25,29 +25,45 @@ export default function Home() {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:3000/candidates")
-      .then((res) => {
-        setData(res.data);
-      }).catch((err) => {
-        console.log(err);
-      })
+    const candidates = [
+      { x: 100, y: 200 },
+      { x: 150, y: 250 },
+      { x: 200, y: 300 },
+      { x: 250, y: 350 },
+      { x: 300, y: 400 },
+      { x: 350, y: 450 },
+      { x: 400, y: 500 },
+      { x: 450, y: 550 },
+      { x: 500, y: 600 },
+      { x: 550, y: 650 },
+      { x: 800, y: 200 },
+      { x: 800, y: 100 },
+      { x: 1550, y: 200 },
+      { x: 1600, y: 150 },
+      { x: 1800, y: 150 },
+      { x: 2000, y: 100 },
+      { x: 2000, y: 0 }
+    ]
+
+    setData(candidates);
   }, [])
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
     const rect = mapRef.current.getBoundingClientRect();
-    const offsetX = (e.clientX - rect.left) / scale;
-    const offsetY = (e.clientY - rect.top) / scale;
+    const offsetX = (e.clientX - rect.left);
+    const offsetY = (e.clientY - rect.top);
     setDragOffset({ x: offsetX, y: offsetY });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const x = (e.clientX - dragOffset.x - 50) / scale;
-    const y = (e.clientY - dragOffset.y - 50) / scale;
+    const x = (e.clientX - dragOffset.x - 50);
+    const y = (e.clientY - dragOffset.y - 50);
 
     mapRef.current.style.transform = `translate(${x}px, ${y}px)`;
   };
+
 
   const handleMouseUp = () => {
     setIsDragging(false);
@@ -56,12 +72,13 @@ export default function Home() {
   const handleWheel = (e) => {
     const scaleFactor = 1.05;
     let newScale = scale;
-    if (e.deltaY < 0) {
+    if (e.deltaY > 0) {
       newScale *= scaleFactor;
     } else {
       newScale /= scaleFactor;
     }
 
+    newScale = Math.min(Math.max(newScale, 0.5), 2)
     setScale(newScale);
   };
 
@@ -70,7 +87,6 @@ export default function Home() {
       className="flex min-h-screen flex-col bg-white p-12 relative"
       ref={mainRef}
     >
-      {/* Nesting stack, okay because it can be dragged */}
       <div
         className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-50"
         onClick={() => setEmployee(!employee)}
@@ -86,6 +102,12 @@ export default function Home() {
             </Label>
           </div>
         </div>
+      </div>
+
+      <div
+        className="absolute top-[50px] right-[60px] z-50"
+      >
+        <Dialog />
       </div>
 
       <div className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] overflow-hidden"

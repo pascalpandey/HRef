@@ -16,11 +16,11 @@ export default function PersonNode() {
       }}
     >
       <button
-        className="rounded-full bg-red-400 bottom-0 left-0 absolute w-[48px] h-[48px]"
+        className="rounded-full bg-red-400 bottom-0 left-0 absolute w-[32px] h-[32px]"
       />
       {showPopup && (
         <div
-          className="w-64 h-44 bg-white text-black absolute top-0 right-0 rounded-md popup shadow-md"
+          className="w-64 h-44 bg-white text-black absolute top-0 right-0 rounded-md popup shadow-md z-10"
         ></div>
       )}
     </div>
