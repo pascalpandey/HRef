@@ -66,7 +66,7 @@ const UploadDialog = () => {
         <Dialog.Root>
             <Dialog.Trigger asChild>
                 <button
-                    className="bg-white text-violet-500 border rounded-md px-4 py-2 shadow-lg"
+                    className="bg-white text-violet-500 rounded-md px-4 py-2 border border-primary shadow-md"
                     onClick={resetInput}
                 >
                     Add Resume

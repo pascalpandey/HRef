@@ -59,15 +59,15 @@ export default function Home() {
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
-    setStartMousePos({ x: e.clientX, y: e.clientY }); 
+    setStartMousePos({ x: e.clientX, y: e.clientY });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    setStartMousePos({ x: e.clientX, y: e.clientY }); 
-    const deltaX = (e.clientX - startMousePos.x)/scale
-    const deltaY = (e.clientY - startMousePos.y)/scale
-    setMapPos({x: mapPos.x + deltaX, y: mapPos.y + deltaY})
+    setStartMousePos({ x: e.clientX, y: e.clientY });
+    const deltaX = (e.clientX - startMousePos.x) / scale;
+    const deltaY = (e.clientY - startMousePos.y) / scale;
+    setMapPos({ x: mapPos.x + deltaX, y: mapPos.y + deltaY });
   };
 
   const handleMouseUp = () => {
@@ -89,11 +89,11 @@ export default function Home() {
 
   return (
     <main
-      className="flex min-h-screen flex-col bg-white p-12 relative"
+      className="flex min-h-screen flex-col bg-white relative"
       ref={mainRef}
     >
       <div
-        className="flex absolute top-[40px] left-[60px] flex-col gap-4 z-30"
+        className="flex absolute top-[30px] left-[50px] flex-col gap-4 z-30"
         onClick={() => setEmployee(!employee)}
       >
         <p className="text-black text-4xl font-extrabold tracking-wider">
@@ -113,16 +113,15 @@ export default function Home() {
       </div>
 
       <div
-        className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] overflow-hidden"
+        className="relative flex flex-col items-center justify-center w-full h-screen overflow-hidden"
         style={{
           cursor: isDragging ? "grabbing" : "grab",
-          border: "3px solid blue",
         }}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
       >
         <div
-          className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] border-red"
+          className="relative flex flex-col items-center justify-center w-full h-screen"
           style={{ scale: `${scale}`, left: mapPos.x, top: mapPos.y }}
         >
           {data.map((el, index) => (
@@ -131,13 +130,13 @@ export default function Home() {
               style={{ left: `${el.x}px`, top: `${el.y}px` }}
               key={index}
             >
-              <PersonNode/>
+              <PersonNode />
             </div>
           ))}
         </div>
       </div>
       {!employee && (
-        <div className="absolute top-[50px] right-[60px] z-30">
+        <div className="absolute top-[40px] right-[50px] z-30">
           <Dialog />
         </div>
       )}
