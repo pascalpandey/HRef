@@ -7,14 +7,12 @@ import PersonNode from "@/components/PersonNode";
 import axios from "axios";
 
 export default function Home() {
-  const [diameter, setDiameter] = useState(48);
   const [employee, setEmployee] = useState(false);
-  const mainRef = useRef(null);
-
+  const [scale, setScale] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const mainRef = useRef(null);
   const mapRef = useRef(null);
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -38,16 +36,15 @@ export default function Home() {
   const handleMouseDown = (e) => {
     setIsDragging(true);
     const rect = mapRef.current.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const offsetY = e.clientY - rect.top;
-
+    const offsetX = (e.clientX - rect.left) / scale;
+    const offsetY = (e.clientY - rect.top) / scale;
     setDragOffset({ x: offsetX, y: offsetY });
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const x = e.clientX - dragOffset.x - 50;
-    const y = e.clientY - dragOffset.y - 50;
+    const x = (e.clientX - dragOffset.x - 50) / scale;
+    const y = (e.clientY - dragOffset.y - 50) / scale;
 
     mapRef.current.style.transform = `translate(${x}px, ${y}px)`;
   };
@@ -57,20 +54,15 @@ export default function Home() {
   };
 
   const handleWheel = (e) => {
-    const maxZoom = 80;
-    const minZoom = 10;
-    let scale = 1;
-
     const scaleFactor = 1.05;
-    if (e.deltaY > 0) {
-      scale *= scaleFactor;
+    let newScale = scale;
+    if (e.deltaY < 0) {
+      newScale *= scaleFactor;
     } else {
-      scale /= scaleFactor;
+      newScale /= scaleFactor;
     }
-    setDiameter((prevDiameter) => {
-      const newDiameter = prevDiameter * scale
-      return Math.min(Math.max(newDiameter, minZoom), maxZoom);
-    });
+
+    setScale(newScale);
   };
 
   return (
@@ -102,6 +94,7 @@ export default function Home() {
         onMouseUp={handleMouseUp}>
         <div
           className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)]"
+          style={{ scale: `${scale}` }}
           ref={mapRef}
         >
           {
@@ -111,14 +104,12 @@ export default function Home() {
                 style={{ left: `${el.x}px`, top: `${el.y}px` }}
                 key={index}
               >
-                <PersonNode diameter={diameter} />
+                <PersonNode />
               </div>
             ))
           }
         </div>
       </div>
-
-
     </main>
   );
 }

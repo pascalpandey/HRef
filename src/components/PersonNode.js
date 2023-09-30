@@ -3,7 +3,7 @@
 import { useState } from "react";
 import "./PersonNode.css";
 
-export default function PersonNode({ diameter }) {
+export default function PersonNode() {
   const [showPopup, setShowPopup] = useState(false);
   return (
     <div
@@ -16,8 +16,7 @@ export default function PersonNode({ diameter }) {
       }}
     >
       <button
-        className="rounded-full bg-red-400 bottom-0 left-0 absolute"
-        style={{ width: `${diameter}px`, height: `${diameter}px`, transition: "width 0.3s ease-in-out, height 0.3s ease-in-out" }}
+        className="rounded-full bg-red-400 bottom-0 left-0 absolute w-[48px] h-[48px]"
       />
       {showPopup && (
         <div
