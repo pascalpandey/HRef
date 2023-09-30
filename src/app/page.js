@@ -5,13 +5,6 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import PersonNode from "@/components/PersonNode";
 import Dialog from "@/components/ui/UploadDialog";
-import { Button } from "@/components/ui/button";
-import DragDrop from "@/components/DragAndDrop";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 export default function Home() {
   const [employee, setEmployee] = useState(false);
@@ -77,7 +70,7 @@ export default function Home() {
   const handleWheel = (e) => {
     const scaleFactor = 1.05;
     let newScale = scale;
-    if (e.deltaY > 0) {
+    if (e.deltaY < 0) {
       newScale *= scaleFactor;
     } else {
       newScale /= scaleFactor;
