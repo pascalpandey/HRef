@@ -17,7 +17,8 @@ export default function Home() {
   const [employee, setEmployee] = useState(false);
   const [scale, setScale] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [startMousePos, setStartMousePos] = useState({ x: 0, y: 0 });
+  const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
   const mainRef = useRef(null);
   const mapRef = useRef(null);
   const [data, setData] = useState([]);
@@ -25,6 +26,7 @@ export default function Home() {
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
     mainRef.current.addEventListener("wheel", handleWheel);
+    document.addEventListener("mouseup", handleMouseUp);
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
@@ -57,18 +59,15 @@ export default function Home() {
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
-    const rect = mapRef.current.getBoundingClientRect();
-    const offsetX = e.clientX - rect.left;
-    const offsetY = e.clientY - rect.top;
-    setDragOffset({ x: offsetX, y: offsetY });
+    setStartMousePos({ x: e.clientX, y: e.clientY }); 
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
-    const x = e.clientX - dragOffset.x - 50;
-    const y = e.clientY - dragOffset.y - 50;
-
-    mapRef.current.style.transform = `translate(${x}px, ${y}px)`;
+    setStartMousePos({ x: e.clientX, y: e.clientY }); 
+    const deltaX = (e.clientX - startMousePos.x)/scale
+    const deltaY = (e.clientY - startMousePos.y)/scale
+    setMapPos({x: mapPos.x + deltaX, y: mapPos.y + deltaY})
   };
 
   const handleMouseUp = () => {
@@ -124,8 +123,7 @@ export default function Home() {
       >
         <div
           className="relative flex flex-col items-center justify-center w-full h-[calc(100vh-120px)] border-red"
-          style={{ scale: `${scale}` }}
-          ref={mapRef}
+          style={{ scale: `${scale}`, left: mapPos.x, top: mapPos.y }}
         >
           {data.map((el, index) => (
             <div
@@ -133,7 +131,7 @@ export default function Home() {
               style={{ left: `${el.x}px`, top: `${el.y}px` }}
               key={index}
             >
-              <PersonNode />
+              <PersonNode/>
             </div>
           ))}
         </div>
