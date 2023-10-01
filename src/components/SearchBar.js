@@ -5,7 +5,7 @@ import searchSvg from "./search.svg";
 import { useEffect, useRef, useState } from "react";
 import { useUpdateEffect } from "usehooks-ts";
 
-export default function SearchBar({ data, setOpenId, setMapPos, handleIsFocus }) {
+export default function SearchBar({ data, setOpenId, handleIsFocus, centerMapPos }) {
   const [searchValue, setSearchValue] = useState("");
   const [showDropDown, setShowDropDown] = useState(false);
   const [listRelevant, setListRelevant] = useState([]);
@@ -13,6 +13,7 @@ export default function SearchBar({ data, setOpenId, setMapPos, handleIsFocus })
 
   useEffect(() => {
     document.addEventListener('click', handleOpenSearchBar)
+
     return () => {
       document.removeEventListener('click', () => handleOpenSearchBar);
     }
@@ -45,6 +46,9 @@ export default function SearchBar({ data, setOpenId, setMapPos, handleIsFocus })
     } else if (searchValue !== "") {
       setShowDropDown(true);
       handleIsFocus(true);
+    } else {
+      setShowDropDown(false);
+      handleIsFocus(false);
     }
   }
 
@@ -76,10 +80,7 @@ export default function SearchBar({ data, setOpenId, setMapPos, handleIsFocus })
                     className="text-sm flex flex-row hover:bg-gray-100 items-center"
                     onClick={() => {
                       setOpenId(person.id);
-                      setMapPos({
-                        x: window.innerWidth / 2 - person.x,
-                        y: window.innerHeight / 2 - person.y,
-                      });
+                      centerMapPos(person);
                     }}
                   >
                     <div className="h-9 w-8 flex justify-center items-center">
@@ -95,9 +96,9 @@ export default function SearchBar({ data, setOpenId, setMapPos, handleIsFocus })
                     </div>
                     <div className="flex gap-2 my-2 mx-2">
                       {JSON.parse(person.keywords.replace(/'/g, '"')).map(
-                        (v) => {
+                        (v, index) => {
                           return (
-                            <div className="rounded-2xl bg-gray-100 text-black px-4 py-1 border border-gray-300">
+                            <div className="rounded-2xl bg-gray-100 text-black px-4 py-1 border border-gray-300" key={index}>
                               {v}
                             </div>
                           );

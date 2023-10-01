@@ -18,6 +18,7 @@ export default function Home() {
   const mainRef = useRef(null);
   const [data, setData] = useState([]);
   const [isFocus, setIsFocus] = useState(false);
+  const mapRef = useRef(null);
 
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
@@ -38,8 +39,8 @@ export default function Home() {
     try {
       const response = await axios.get(
         viewEmployee
-          ? "http://localhost:8000/employees"
-          : "http://localhost:8000/candidates"
+          ? `${process.env.NEXT_PUBLIC_URL}employees`
+          : `${process.env.NEXT_PUBLIC_URL}candidates`
       );
       setData(response.data);
     } catch (error) {
@@ -49,7 +50,7 @@ export default function Home() {
 
   const handleAcceptCandidate = async (id) => {
     await axios({
-      url: `http://localhost:8000/candidates/accept/${id}`,
+      url: `${process.env.NEXT_PUBLIC_URL}candidates/accept/${id}`,
       method: "POST",
     });
     // refetch data dari model yang udah di retrain
@@ -58,7 +59,7 @@ export default function Home() {
 
   const handleRejectCandidtate = async (id) => {
     await axios({
-      url: `http://localhost:8000/candidates/reject/${id}`,
+      url: `${process.env.NEXT_PUBLIC_URL}candidates/reject/${id}`,
       method: "DELETE",
     });
     // refetch data dari model yang udah di retrain
@@ -81,6 +82,14 @@ export default function Home() {
   const handleMouseUp = () => {
     setIsDragging(false);
   };
+
+  const centerMapPos = (person) => {
+    const rect = mapRef.current.getBoundingClientRect();
+    setMapPos({
+      x: (rect.width / 2 - person.x),
+      y: (rect.height / 2 - person.y),
+    });
+  }
 
   const handleWheel = (e) => {
     const scaleFactor = 1.05;
@@ -129,6 +138,8 @@ export default function Home() {
           setOpenId={setOpenId}
           setMapPos={setMapPos}
           handleIsFocus={handleIsFocus}
+          scale={scale}
+          centerMapPos={centerMapPos}
         />
       </div>
 
@@ -143,6 +154,7 @@ export default function Home() {
         <div
           className="relative flex flex-col items-center justify-center w-full h-screen"
           style={{ scale: `${scale}`, left: mapPos.x, top: mapPos.y }}
+          ref={mapRef}
         >
           {data?.map((el, index) => (
             <div
