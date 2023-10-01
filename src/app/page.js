@@ -28,31 +28,31 @@ export default function Home() {
 
   useEffect(() => {
     const candidates = [
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9, x: 100, y: 200 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 150, y: 250 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 200, y: 300 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 250, y: 350 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 300, y: 400 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 350, y: 450 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 400, y: 500 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 450, y: 550 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 500, y: 600 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 550, y: 650 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 800, y: 200 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 800, y: 100 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1550, y: 200 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1600, y: 150 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1800, y: 150 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 2000, y: 100 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 2000, y: 0 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf", score: 6.9, x: 100, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf", score: 6.9,x: 150, y: 250 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf", score: 6.9,x: 200, y: 300 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 250, y: 350 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 300, y: 400 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 350, y: 450 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 400, y: 500 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 450, y: 550 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 500, y: 600 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 550, y: 650 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 800, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 800, y: 100 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 1550, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 1600, y: 150 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 1800, y: 150 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 2000, y: 100 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 2000, y: 0 },
     ];
 
     const employees = [
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9, x: 10, y: 20 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 150, y: 250 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 200, y: 300 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 250, y: 350 },
-      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 300, y: 400 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9, x: 10, y: 20 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 150, y: 250 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 200, y: 300 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 250, y: 350 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", resumeLink: "https://utfs.io/f/6dfa044a-7b8a-4f6e-a3ec-8d3bb428c406-2gj.pdf",score: 6.9,x: 300, y: 400 },
     ];
 
     setData(viewEmployee? employees: candidates);
