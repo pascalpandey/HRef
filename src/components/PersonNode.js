@@ -9,7 +9,7 @@ export default function PersonNode({ data, viewEmployee, isOpen, searchBarActive
       <HoverCard.Trigger asChild>
         {!viewEmployee ? (
           <button
-            className="rounded-full bg-red-400 "
+            className="rounded-full"
             style={{
               width: `${48}px`,
               height: `${48}px`,
@@ -19,11 +19,12 @@ export default function PersonNode({ data, viewEmployee, isOpen, searchBarActive
         ) : (
           <a href={data?.resumeLink} target="_blank">
             <button
-              className="rounded-full bg-red-400 "
+              className="rounded-full"
               style={{
                 width: `${48}px`,
                 height: `${48}px`,
                 backgroundColor: data?.color,
+                opacity: 0.6
               }}
             />
           </a>
@@ -40,7 +41,6 @@ export default function PersonNode({ data, viewEmployee, isOpen, searchBarActive
               <span className="font-bold">
                 {viewEmployee ? "Employee Id:" : "Applicant Id:"}
               </span>{" "}
-              {data?.id}
               {data?.id}
             </p>
             <p>

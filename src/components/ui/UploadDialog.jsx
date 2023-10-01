@@ -41,7 +41,7 @@ const UploadDialog = () => {
         const data = url.map((v) => v.url);
         axios({
             method: "post",
-            url: "http://127.0.0.1:8000/candidates",
+            url: `${process.env.NEXT_PUBLIC_URL}/candidates`,
             data: {
                 data,
             },
@@ -96,7 +96,9 @@ const UploadDialog = () => {
                             onClick={handleUploadClick}
                             disabled={status === STATUS_UPLOADING}
                         >
-                            Upload
+                            {status === STATUS_UPLOADING
+                                ? "Loading..."
+                                : "Upload"}
                         </button>
                     </div>
                     <Dialog.Close asChild>
