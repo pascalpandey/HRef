@@ -30,17 +30,35 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(viewEmployee ? "http://localhost:8000/employees" : "http://localhost:8000/candidates");
-        setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     fetchData();
   }, [viewEmployee]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(viewEmployee ? "http://localhost:8000/employees" : "http://localhost:8000/candidates");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleAcceptCandidate = async (id) => {
+    await axios({
+      url: `http://localhost:8000/candidates/accept/${id}`,
+      method: "POST"
+    })
+    // refetch data dari model yang udah di retrain
+    fetchData();
+  }
+
+  const handleRejectCandidtate = async (id) => {
+    await axios({
+      url: `http://localhost:8000/candidates/reject/${id}`,
+      method: "DELETE"
+    })
+    // refetch data dari model yang udah di retrain
+    fetchData();
+  }
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -117,7 +135,7 @@ export default function Home() {
               style={{ left: `${el.x}px`, top: `${el.y}px` }}
               key={index}
             >
-              <PersonNode data={el} viewEmployee={viewEmployee} isOpen={openId === el.id} />
+              <PersonNode data={el} viewEmployee={viewEmployee} isOpen={openId === el.id} handleAcceptCandidate={handleAcceptCandidate} handleRejectCandidtate={handleRejectCandidtate} />
             </div>
           ))}
         </div>
