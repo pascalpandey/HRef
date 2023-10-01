@@ -6,6 +6,7 @@ import { Switch } from "@/components/ui/switch";
 import PersonNode from "@/components/PersonNode";
 import Dialog from "@/components/ui/UploadDialog";
 import axios from "axios";
+import SearchBar from "@/components/SearchBar";
 
 export default function Home() {
   const [viewEmployee, setViewEmployee] = useState(false);
@@ -77,12 +78,11 @@ export default function Home() {
     >
       <div
         className="flex absolute top-[30px] left-[50px] flex-col gap-4 z-30"
-        onClick={() => setViewEmployee(!viewEmployee)}
       >
         <p className="text-black text-4xl font-extrabold tracking-wider">
           <span className="text-7xl text-primary">HR</span>ef
         </p>
-        <div className="flex space-x-2">
+        <div className="flex space-x-2" onClick={() => setViewEmployee(!viewEmployee)}>
           <Switch id="airplane-mode" />
           <div className="w-[65px] text-center">
             <Label
@@ -93,6 +93,9 @@ export default function Home() {
             </Label>
           </div>
         </div>
+      </div>
+      <div className="flex absolute top-[30px] left-1/2 flex-col gap-4 z-30">
+        <SearchBar/>
       </div>
 
       <div
