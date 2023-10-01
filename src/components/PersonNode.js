@@ -1,14 +1,14 @@
 "use client";
 
 import * as HoverCard from "@radix-ui/react-hover-card";
-import { Button } from "./ui/button";
 
-export default function PersonNode({ data, viewEmployee }) {
+export default function PersonNode({ data, viewEmployee, handleAcceptCandidate, handleRejectCandidtate }) {
   const keywordsArray = JSON.parse(data?.keywords.replace(/'/g, '"'));
+
   return (
     <HoverCard.Root>
       <HoverCard.Trigger asChild>
-        {viewEmployee ? (
+        {!viewEmployee ? (
           <button
             className="rounded-full bg-red-400 "
             style={{
@@ -41,6 +41,7 @@ export default function PersonNode({ data, viewEmployee }) {
                 {viewEmployee ? "Employee Id:" : "Applicant Id:"}
               </span>{" "}
               {data?.id}
+              {data?.id}
             </p>
             <p>
               <span className="font-bold">
@@ -49,22 +50,26 @@ export default function PersonNode({ data, viewEmployee }) {
               {data?.score}
             </p>
             <div className="flex flex-wrap w-full gap-2 mt-1">
-              {keywordsArray.map((v) => {
+              {keywordsArray.map((v, index) => {
                 return (
-                  <div className="rounded-2xl bg-gray-100 text-black px-4 py-1 border border-gray-300">
+                  <div className="rounded-2xl bg-gray-100 text-black px-4 py-1 border border-gray-300" key={index}>
                     {v}
                   </div>
                 );
               })}
             </div>
-            <div className="flex gap-2 mt-2">
-              <button className="w-1/2 rounded-md p-1 font-semibold text-white bg-green-600 hover:bg-green-500">
-                Accept
-              </button>
-              <button className="w-1/2 rounded-md p-1 font-semibold text-white bg-red-600 hover:bg-red-500">
-                Reject
-              </button>
-            </div>
+            {
+              !viewEmployee &&
+              <div className="flex gap-2 mt-2">
+                <button className="w-1/2 border border-gray-300 rounded-md p-1 bg-green-50" onClick={() => handleAcceptCandidate(data?.id)}>
+                  Accept
+                </button>
+                <button className="w-1/2 border border-gray-300 rounded-md p-1 bg-red-50" onClick={() => handleRejectCandidtate(data?.id)}>
+                  Reject
+                </button>
+              </div>
+            }
+
           </div>
         </HoverCard.Content>
       </HoverCard.Portal>
