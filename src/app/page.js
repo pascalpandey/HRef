@@ -14,6 +14,7 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [startMousePos, setStartMousePos] = useState({ x: 0, y: 0 });
   const [mapPos, setMapPos] = useState({ x: 0, y: 0 });
+  const [openId, setOpenId] = useState();
   const mainRef = useRef(null);
   const [data, setData] = useState([]);
 
@@ -95,7 +96,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex absolute top-[40px] left-[calc((100vw-640px)/2)] flex-col gap-4 z-30 w-[640px] h-[60px]">
-        <SearchBar/>
+        <SearchBar data={data} setOpenId={setOpenId} setMapPos={setMapPos}/>
       </div>
 
       <div
@@ -116,13 +117,13 @@ export default function Home() {
               style={{ left: `${el.x}px`, top: `${el.y}px` }}
               key={index}
             >
-              <PersonNode data={el} viewEmployee={viewEmployee} />
+              <PersonNode data={el} viewEmployee={viewEmployee} isOpen={openId === el.id} />
             </div>
           ))}
         </div>
       </div>
       {!viewEmployee && (
-        <div className="absolute top-[40px] right-[50px] z-30">
+        <div className="absolute top-[45px] right-[50px] z-30">
           <Dialog />
         </div>
       )}

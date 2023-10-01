@@ -1,12 +1,11 @@
 "use client";
 
 import * as HoverCard from "@radix-ui/react-hover-card";
-import { Button } from "./ui/button";
 
-export default function PersonNode({ data, viewEmployee }) {
+export default function PersonNode({ data, viewEmployee, isOpen }) {
   const keywordsArray = JSON.parse(data?.keywords.replace(/'/g, '"'));
-  return (
-    <HoverCard.Root>
+  return (  
+    <HoverCard.Root openDelay={0}>
       <HoverCard.Trigger asChild>
         {viewEmployee ? (
           <button
@@ -30,10 +29,11 @@ export default function PersonNode({ data, viewEmployee }) {
           </a>
         )}
       </HoverCard.Trigger>
-      <HoverCard.Portal>
+      <HoverCard.Portal >
         <HoverCard.Content
           className="w-64 min-h-32 data-[side=bottom]:animate-slideUpAndFade data-[side=right]:animate-slideLeftAndFade data-[side=left]:animate-slideRightAndFade data-[side=top]:animate-slideDownAndFade rounded-md bg-white p-5 shadow-lg data-[state=open]:transition-all text-black"
           sideOffset={5}
+          
         >
           <div className="flex flex-col gap-1">
             <p>
