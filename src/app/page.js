@@ -147,7 +147,7 @@ export default function Home() {
           {data?.map((el, index) => (
             <div
               className="absolute"
-              style={{ left: `${el.x}px`, top: `${el.y}px` }}
+              style={{ left: `${el.x/20*window.innerWidth}px`, top: `${el.y/20*window.innerHeight}px` }}
               key={index}
             >
               <PersonNode
