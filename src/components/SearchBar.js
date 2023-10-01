@@ -57,12 +57,10 @@ export default function SearchBar({ data, setOpenId, setMapPos }) {
                       className="text-sm flex flex-row hover:bg-gray-100 items-center"
                       onClick={() => {
                         setOpenId(person.id);
-                        console.log(mapPos)
                         setMapPos({
-                          x: setMapPos.x + person.x - window.innerWidth / 2,
-                          y: setMapPos.y + person.y - window.innerHeight / 2,
+                          x: window.innerWidth/2 - person.x,
+                          y: window.innerHeight/2 - person.y,
                         });
-                        console.log(mapPos)
                       }}
                     >
                       <div className="h-9 w-8 flex justify-center items-center">

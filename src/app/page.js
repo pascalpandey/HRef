@@ -35,7 +35,11 @@ export default function Home() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(viewEmployee ? "http://localhost:8000/employees" : "http://localhost:8000/candidates");
+      const response = await axios.get(
+        viewEmployee
+          ? "http://localhost:8000/employees"
+          : "http://localhost:8000/candidates"
+      );
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -45,20 +49,20 @@ export default function Home() {
   const handleAcceptCandidate = async (id) => {
     await axios({
       url: `http://localhost:8000/candidates/accept/${id}`,
-      method: "POST"
-    })
+      method: "POST",
+    });
     // refetch data dari model yang udah di retrain
     fetchData();
-  }
+  };
 
   const handleRejectCandidtate = async (id) => {
     await axios({
       url: `http://localhost:8000/candidates/reject/${id}`,
-      method: "DELETE"
-    })
+      method: "DELETE",
+    });
     // refetch data dari model yang udah di retrain
     fetchData();
-  }
+  };
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -95,13 +99,14 @@ export default function Home() {
       className="flex min-h-screen flex-col bg-white relative"
       ref={mainRef}
     >
-      <div
-        className="flex absolute top-[30px] left-[50px] flex-col gap-4 z-30"
-      >
+      <div className="flex absolute top-[30px] left-[50px] flex-col gap-4 z-30">
         <p className="text-black text-4xl font-extrabold tracking-wider">
           <span className="text-7xl text-primary">HR</span>ef
         </p>
-        <div className="flex space-x-2" onClick={() => setViewEmployee(!viewEmployee)}>
+        <div
+          className="flex space-x-2"
+          onClick={() => setViewEmployee(!viewEmployee)}
+        >
           <Switch id="airplane-mode" />
           <div className="w-[65px] text-center">
             <Label
@@ -114,7 +119,11 @@ export default function Home() {
         </div>
       </div>
       <div className="flex absolute top-[40px] left-[calc((100vw-640px)/2)] flex-col gap-4 z-30 w-[640px] h-[60px]">
-        <SearchBar data={data} setOpenId={setOpenId} setMapPos={setMapPos}/>
+        <SearchBar
+          data={data}
+          setOpenId={setOpenId}
+          setMapPos={setMapPos}
+        />
       </div>
 
       <div
@@ -135,7 +144,13 @@ export default function Home() {
               style={{ left: `${el.x}px`, top: `${el.y}px` }}
               key={index}
             >
-              <PersonNode data={el} viewEmployee={viewEmployee} isOpen={openId === el.id} handleAcceptCandidate={handleAcceptCandidate} handleRejectCandidtate={handleRejectCandidtate} />
+              <PersonNode
+                data={el}
+                viewEmployee={viewEmployee}
+                isOpen={openId === el.id}
+                handleAcceptCandidate={handleAcceptCandidate}
+                handleRejectCandidtate={handleRejectCandidtate}
+              />
             </div>
           ))}
         </div>
