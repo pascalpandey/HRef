@@ -80,7 +80,7 @@ export default function Home() {
         onClick={() => setViewEmployee(!viewEmployee)}
       >
         <p className="text-black text-4xl font-extrabold tracking-wider">
-          <span className="text-6xl text-primary">HR</span>ef
+          <span className="text-7xl text-primary">HR</span>ef
         </p>
         <div className="flex space-x-2">
           <Switch id="airplane-mode" />

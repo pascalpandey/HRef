@@ -1,8 +1,12 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast';
+import { Noto_Sans } from "next/font/google";
 
-const inter = Inter({ subsets: ['latin'] })
+const noto_sans = Noto_Sans({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +16,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}
+      <body>{children}
         <Toaster /></body>
     </html>
   )

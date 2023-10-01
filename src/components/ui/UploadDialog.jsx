@@ -35,9 +35,18 @@ const UploadDialog = () => {
     setNumberOfFiles(files.length + e.target.files.length);
   };
 
-  const handleUploadClick = () => {
+  const handleUploadClick = async () => {
     setStatus(STATUS_UPLOADING);
-    startUpload(files)
+    const url = await startUpload(files)
+    const data = url.map((v) => v.url)
+    axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/candidate',
+      data: {
+        data
+      }
+    })
+    resetInput()
   };
 
   return (
