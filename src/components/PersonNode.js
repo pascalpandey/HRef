@@ -40,7 +40,7 @@ export default function PersonNode({ data, viewEmployee }) {
               <span className="font-bold">
                 {viewEmployee ? "Employee Id:" : "Applicant Id:"}
               </span>{" "}
-              {data?.name}
+              {data?.id}
             </p>
             <p>
               <span className="font-bold">
@@ -58,10 +58,10 @@ export default function PersonNode({ data, viewEmployee }) {
               })}
             </div>
             <div className="flex gap-2 mt-2">
-              <button className="w-1/2 border border-gray-300 rounded-md p-1 bg-green-50">
+              <button className="w-1/2 rounded-md p-1 font-semibold text-white bg-green-600 hover:bg-green-500">
                 Accept
               </button>
-              <button className="w-1/2 border border-gray-300 rounded-md p-1 bg-red-50">
+              <button className="w-1/2 rounded-md p-1 font-semibold text-white bg-red-600 hover:bg-red-500">
                 Reject
               </button>
             </div>
