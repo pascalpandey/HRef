@@ -3,6 +3,7 @@
 import * as HoverCard from "@radix-ui/react-hover-card";
 
 export default function PersonNode({ data, viewEmployee }) {
+  const keywordsArray = JSON.parse(data?.keywords.replace(/'/g, '"'));
   return (
     <HoverCard.Root>
       <HoverCard.Trigger asChild>
@@ -19,10 +20,10 @@ export default function PersonNode({ data, viewEmployee }) {
           sideOffset={5}
         >
           <p>
-            <span className="font-bold">{viewEmployee ? "Employee Id" : "Applicant Id"}</span>: {data?.name}
+            <span className="font-bold">{viewEmployee ? "Employee Id" : "Applicant Id"}</span>: {data?.id}
           </p>
 
-          <p><span className="font-bold">Keywords </span> {data?.keywords.join(", ")}</p>
+          <p><span className="font-bold">Skills: </span> {keywordsArray.join(", ")}</p>
           <p><span className="font-bold">Score </span>: {data?.score}</p>
         </HoverCard.Content>
       </HoverCard.Portal>
