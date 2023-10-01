@@ -17,6 +17,7 @@ export default function Home() {
   const [openId, setOpenId] = useState();
   const mainRef = useRef(null);
   const [data, setData] = useState([]);
+  const [isFocus, setIsFocus] = useState(false);
 
   useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove);
@@ -94,6 +95,10 @@ export default function Home() {
     setScale(newScale);
   };
 
+  const handleIsFocus = (status) => {
+    setIsFocus(status)
+  }
+
   return (
     <main
       className="flex min-h-screen flex-col bg-white relative"
@@ -123,6 +128,7 @@ export default function Home() {
           data={data}
           setOpenId={setOpenId}
           setMapPos={setMapPos}
+          handleIsFocus={handleIsFocus}
         />
       </div>
 
@@ -150,8 +156,10 @@ export default function Home() {
                 isOpen={openId === el.id}
                 handleAcceptCandidate={handleAcceptCandidate}
                 handleRejectCandidtate={handleRejectCandidtate}
+                searchBarActive={isFocus}
               />
             </div>
+
           ))}
         </div>
       </div>

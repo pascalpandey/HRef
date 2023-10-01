@@ -2,10 +2,10 @@
 
 import * as HoverCard from "@radix-ui/react-hover-card";
 
-export default function PersonNode({ data, viewEmployee, isOpen }) {
+export default function PersonNode({ data, viewEmployee, isOpen, searchBarActive }) {
   const keywordsArray = JSON.parse(data?.keywords.replace(/'/g, '"'));
-  return (  
-    <HoverCard.Root openDelay={0}>
+  return (
+    <HoverCard.Root openDelay={0} open={searchBarActive ? isOpen : undefined}>
       <HoverCard.Trigger asChild>
         {!viewEmployee ? (
           <button
@@ -33,7 +33,7 @@ export default function PersonNode({ data, viewEmployee, isOpen }) {
         <HoverCard.Content
           className="w-64 min-h-32 data-[side=bottom]:animate-slideUpAndFade data-[side=right]:animate-slideLeftAndFade data-[side=left]:animate-slideRightAndFade data-[side=top]:animate-slideDownAndFade rounded-md bg-white p-5 shadow-lg data-[state=open]:transition-all text-black"
           sideOffset={5}
-          
+
         >
           <div className="flex flex-col gap-1">
             <p>
