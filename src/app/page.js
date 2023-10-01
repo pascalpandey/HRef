@@ -94,7 +94,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex absolute top-[30px] left-1/2 flex-col gap-4 z-30">
+      <div className="flex absolute top-[40px] left-[calc((100vw-640px)/2)] flex-col gap-4 z-30 w-[640px] h-[60px]">
         <SearchBar/>
       </div>
 
