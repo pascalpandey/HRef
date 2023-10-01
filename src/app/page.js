@@ -7,7 +7,7 @@ import PersonNode from "@/components/PersonNode";
 import Dialog from "@/components/ui/UploadDialog";
 
 export default function Home() {
-  const [employee, setEmployee] = useState(false);
+  const [viewEmployee, setViewEmployee] = useState(false);
   const [scale, setScale] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
   const [startMousePos, setStartMousePos] = useState({ x: 0, y: 0 });
@@ -28,27 +28,35 @@ export default function Home() {
 
   useEffect(() => {
     const candidates = [
-      { x: 100, y: 200 },
-      { x: 150, y: 250 },
-      { x: 200, y: 300 },
-      { x: 250, y: 350 },
-      { x: 300, y: 400 },
-      { x: 350, y: 450 },
-      { x: 400, y: 500 },
-      { x: 450, y: 550 },
-      { x: 500, y: 600 },
-      { x: 550, y: 650 },
-      { x: 800, y: 200 },
-      { x: 800, y: 100 },
-      { x: 1550, y: 200 },
-      { x: 1600, y: 150 },
-      { x: 1800, y: 150 },
-      { x: 2000, y: 100 },
-      { x: 2000, y: 0 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9, x: 100, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 150, y: 250 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 200, y: 300 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 250, y: 350 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 300, y: 400 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 350, y: 450 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 400, y: 500 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 450, y: 550 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 500, y: 600 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 550, y: 650 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 800, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 800, y: 100 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1550, y: 200 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1600, y: 150 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 1800, y: 150 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 2000, y: 100 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 2000, y: 0 },
     ];
 
-    setData(candidates);
-  }, []);
+    const employees = [
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9, x: 10, y: 20 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 150, y: 250 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 200, y: 300 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 250, y: 350 },
+      { name: "kevin", keywords:["ganteng", "bebek"], color: "red", score: 6.9,x: 300, y: 400 },
+    ];
+
+    setData(viewEmployee? employees: candidates);
+  }, [viewEmployee]);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -87,7 +95,7 @@ export default function Home() {
     >
       <div
         className="flex absolute top-[30px] left-[50px] flex-col gap-4 z-30"
-        onClick={() => setEmployee(!employee)}
+        onClick={() => setViewEmployee(!viewEmployee)}
       >
         <p className="text-black text-4xl font-extrabold tracking-wider">
           <span className="text-6xl text-primary">HR</span>ef
@@ -99,7 +107,7 @@ export default function Home() {
               htmlFor="airplane-mode"
               className="text-primary pt-1 font-semibold"
             >
-              {employee ? "Employee" : "Applicants"}
+              {viewEmployee ? "Employee" : "Candidates"}
             </Label>
           </div>
         </div>
@@ -128,7 +136,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      {!employee && (
+      {!viewEmployee && (
         <div className="absolute top-[40px] right-[50px] z-30">
           <Dialog />
         </div>
